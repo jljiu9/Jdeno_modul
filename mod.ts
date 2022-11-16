@@ -1,4 +1,6 @@
+// deno-lint-ignore-file
 const jljiu = () => {}
-jljiu.cl = (x:any)=> console.log(x)
+let cl = (x:any)=> console.log(x)
 
-export default jljiu
+export {cl}
+export * from './database/db.ts'
