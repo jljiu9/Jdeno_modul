@@ -113,17 +113,18 @@ Index Of Script
             jQuery('.popup-gallery, .icon-grid').magnificPopup({
                 delegate: 'a.image-popup-vertical-fit',
                 type: 'image',
-                tLoading: 'Loading image #%curr%...',
+                // tLoading: 'Loading image #%curr%...',
                 mainClass: 'mfp-img-mobile',
                 gallery: {
                     enabled: true,
-                    navigateByImgClick: true,
+                    navigateByImgClick: false,
                     preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
                 },
                 image: {
-                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                    tError: '未能加载，请重新点击图片！',
                     titleSrc: function(item) {
-                        return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';
+                        return item.el.attr('title')
+                        // return item.el.attr('title') + '<small>dsdsdsd</small>';
                     }
                 }
             });
