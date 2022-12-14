@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/sw.js"></script>
+    <link rel="shortcut icon" href="/jljiu-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网站代理</title>
+</head>
+
+<body>
+    <h1>初始界面</h1>
+    <img src="/img/jljiu-logo.png">
+    <img src="https://share.jsave.shop/jljiu-logo.png">
+    <link rel="stylesheet" href="https://deno.land/x/jljiu@box2/cloudbox/assets/css/backend-plugin.min.css">
+    <link rel="stylesheet" href="https://deno.land/x/jljiu@box2/cloudbox/assets/css/backend.css?v=1.0.0">
+
+    <link rel="stylesheet"
+        href="https://deno.land/x/jljiu@box2/cloudbox/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://deno.land/x/jljiu@box2/cloudbox/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://deno.land/x/jljiu@box2/cloudbox/assets/vendor/remixicon/fonts/remixicon.css">
+    
+    <script>
+        /* 判断当前浏览器是否支持serviceWorker */
+        if ('serviceWorker' in navigator) {
+            /* 当页面加载完成就创建一个serviceWorker */
+            window.addEventListener('load', function () {
+                /* 创建并指定对应的执行内容 */
+                /* scope 参数是可选的，可以用来指定你想让 service worker 控制的内容的子目录。 在这个例子里，我们指定了 '/'，表示 根网域下的所有内容。这也是默认值。 */
+                navigator.serviceWorker.register('./sw.js', { scope: './' })
+                    .then(function (registration) {
+
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(function (err) {
+
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+                navigator.serviceWorker.controller.postMessage(window.location.pathname.replace('/',''));
+                navigator.serviceWorker.addEventListener('message', function (e) {
+                    console.log(e.data);
+                })
+            });
+        }
+    </script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+    </style>
+</body>
+
+</html>
